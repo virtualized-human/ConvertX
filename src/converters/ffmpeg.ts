@@ -699,8 +699,12 @@ export async function convert(
     extra = `-filter:v "scale='min(256,iw)':min'(256,ih)':force_original_aspect_ratio=decrease"`;
     message = "Done: resized to 256x256";
   }
+  if (convertTo === "webm") {
+    // make sure image is 256x256 or smaller
+    extra = `-row-mt 1 -c:v libvpx-vp9 -b:v 0 -crf 30`;
+  }
 
-  const command = `ffmpeg -i "${filePath}" -preset veryfast -row-mt 1 ${extra} "${targetPath}"`;
+  const command = `ffmpeg -i "${filePath}" -preset veryfast ${extra} "${targetPath}"`;
 
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
