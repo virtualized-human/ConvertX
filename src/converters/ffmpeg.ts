@@ -591,7 +591,7 @@ export const properties = {
       "mp2",
       "mp3",
       "mp4",
-      "mp4_libx265",
+      "libx265.mp4",
       "mpa",
       "mpd",
       "mpeg",
@@ -705,7 +705,7 @@ export async function convert(
     extra = `-row-mt 1 -c:v libvpx-vp9 -b:v 0 -crf 30`;
   }
 
-  if (convertTo === "mp4_libx265") {
+  if (convertTo === "libx265.mp4") {
     extra = `-vcodec libx265`
   }
 
