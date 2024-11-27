@@ -253,6 +253,7 @@ export const properties = {
       "mp2",
       "mp3",
       "mp4",
+      "mp4_libx265",
       "mpa",
       "mpc",
       "mpc8",
@@ -702,6 +703,10 @@ export async function convert(
   if (convertTo === "webm") {
     // make sure image is 256x256 or smaller
     extra = `-row-mt 1 -c:v libvpx-vp9 -b:v 0 -crf 30`;
+  }
+
+  if (convertTo === "mp4_libx265") {
+    extra = `-vcodec libx265`
   }
 
   const command = `ffmpeg -i "${filePath}" -preset veryfast ${extra} "${targetPath}"`;
